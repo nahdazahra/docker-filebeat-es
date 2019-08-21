@@ -6,8 +6,6 @@ services:
     environment:
       - "LOGGING_QUIET=true"
       - port=5601
-    links:
-      - elasticsearch
     network_mode: host
 
   elasticsearch:

@@ -20,7 +20,7 @@ services:
      - "/var/lib/docker/containers:/usr/share/dockerlogs/data:ro"
       # needed to access additional informations about containers
      - "/var/run/docker.sock:/var/run/docker.sock"
-     - "filebeat.yml:/usr/share/filebeat/filebeat.yml"
+     - "./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml"
     
   kibana:
     hostname: kibana
@@ -28,8 +28,6 @@ services:
     environment:
       - "LOGGING_QUIET=true"
       - port=5601
-    links:
-      - elasticsearch
     network_mode: host
 
   elasticsearch:
