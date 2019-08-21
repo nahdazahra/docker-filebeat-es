@@ -19,6 +19,5 @@ services:
      - "/var/lib/docker/containers:/usr/share/dockerlogs/data:ro"
       # needed to access additional informations about containers
      - "/var/run/docker.sock:/var/run/docker.sock"
-     - "filebeat.yml:/usr/share/filebeat/filebeat.yml"
      network_mode: host
     
