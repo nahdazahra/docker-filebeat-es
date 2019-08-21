@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  app:
+    image: docker-logs-elk/dummy-app:1.0.0
+    build:
+      context: dummy-app
+      dockerfile: Dockerfile
+    network_mode: host
+
+  filebeat:
+    hostname: filebeat
+    image: docker-logs-elk/filebeat:1.0.0
+    build:
+      context: filebeat
+      dockerfile: Dockerfile
+    volumes:
+      # needed to access all docker logs (read only) :
+     - "/var/lib/docker/containers:/usr/share/dockerlogs/data:ro"
+      # needed to access additional informations about containers
+     - "/var/run/docker.sock:/var/run/docker.sock"
+     - "filebeat.yml:/usr/share/filebeat/filebeat.yml"
+     network_mode: host
+    
+  kibana:
+    image: kibana:6.5.2
+    environment:
+      - "LOGGING_QUIET=true"
+      - port=5601
+    links:
+      - elasticsearch
+    network_mode: host
+
+  elasticsearch:
+    hostname: elasticsearch
+    image: docker-logs-elk/elasticsearch:1.0.0
+    build:
+      context: elasticsearch
+      dockerfile: Dockerfile
+    environment:
+      - cluster.name=docker-logs-elk-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+      - port=9200
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    network_mode: host
