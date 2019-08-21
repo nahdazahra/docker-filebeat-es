@@ -10,6 +10,7 @@ services:
 
   filebeat:
     hostname: filebeat
+    network_mode: host
     image: docker-logs-elk/filebeat:1.0.0
     build:
       context: filebeat
@@ -20,9 +21,9 @@ services:
       # needed to access additional informations about containers
      - "/var/run/docker.sock:/var/run/docker.sock"
      - "filebeat.yml:/usr/share/filebeat/filebeat.yml"
-     network_mode: host
     
   kibana:
+    hostname: kibana
     image: kibana:6.5.2
     environment:
       - "LOGGING_QUIET=true"
