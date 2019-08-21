@@ -2,22 +2,21 @@ version: '3'
 
 services:
   app:
-    image: docker-logs-elk/dummy-app:1.0.0
+    image: dummy-app:1.0.0
     build:
-      context: dummy-app
+      context: ../dummy-app
       dockerfile: Dockerfile
     network_mode: host
 
   filebeat:
     hostname: filebeat
-    image: docker-logs-elk/filebeat:1.0.0
+    image: filebeat:1.0.0
     build:
-      context: filebeat
+      context: .
       dockerfile: Dockerfile
     volumes:
       # needed to access all docker logs (read only) :
      - "/var/lib/docker/containers:/usr/share/dockerlogs/data:ro"
       # needed to access additional informations about containers
      - "/var/run/docker.sock:/var/run/docker.sock"
-     network_mode: host
-    
+    network_mode: host

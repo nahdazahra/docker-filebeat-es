@@ -10,9 +10,9 @@ services:
 
   elasticsearch:
     hostname: elasticsearch
-    image: docker-logs-elk/elasticsearch:1.0.0
+    image: elasticsearch:1.0.0
     build:
-      context: elasticsearch
+      context: .
       dockerfile: Dockerfile
     environment:
       - cluster.name=docker-logs-elk-cluster
