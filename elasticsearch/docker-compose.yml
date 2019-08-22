@@ -7,6 +7,8 @@ services:
       - "LOGGING_QUIET=true"
       - port=5601
     network_mode: host
+    volumes: 
+      - "../kibana/kibana.yml:/usr/share/kibana/config/kibana.yml"
 
   elasticsearch:
     hostname: elasticsearch

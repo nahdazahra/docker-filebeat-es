@@ -17,9 +17,9 @@ services:
       dockerfile: Dockerfile
     volumes:
       # needed to access all docker logs (read only) :
-     - "/var/lib/docker/containers:/usr/share/dockerlogs/data:ro"
+      - "/var/lib/docker/containers:/usr/share/dockerlogs/data:ro"
       # needed to access additional informations about containers
-     - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/var/run/docker.sock:/var/run/docker.sock"
     
   kibana:
     hostname: kibana
@@ -28,6 +28,8 @@ services:
       - "LOGGING_QUIET=true"
       - port=5601
     network_mode: host
+    volumes: 
+      - "kibana/kibana.yml:/usr/share/kibana/config/kibana.yml"
 
   elasticsearch:
     hostname: elasticsearch
