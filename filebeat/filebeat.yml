@@ -26,7 +26,7 @@ processors:
 
 # setup filebeat to send output to elasticsearch
 output.elasticsearch:
-  hosts: ["localhost:9200"]
+  hosts: ["172.20.20.207:9200"]
   index: app1nahda-%{[beat.version]}-%{+yyyy.MM.dd}"
 
 setup.template.name: "app1nahda"
