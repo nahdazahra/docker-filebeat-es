@@ -16,12 +16,12 @@ filebeat.config.modules:
 
 processors:
   # decode the log field (sub JSON document) if JSON encoded, then maps it's fields to elasticsearch fields
-- decode_json_fields:
+  - decode_json_fields:
     fields: ["log", "message"]
     target: ""
     # overwrite existing target elasticsearch fields while decoding json fields    
     overwrite_keys: true
-- add_docker_metadata:
+  - add_docker_metadata:
     host: "unix:///var/run/docker.sock"
 
 # setup filebeat to send output to elasticsearch
@@ -32,8 +32,8 @@ output.elasticsearch:
 setup.template.name: "app1nahda"
 setup.template.pattern: "app1nahda-*"
 
-setup.kibana:
-  host: "localhost:5601"
+# setup.kibana:
+#   host: "localhost:5601"
 
 # Write Filebeat own logs only to file to avoid catching them with itself in docker log files
 logging.level: warning
