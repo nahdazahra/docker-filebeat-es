@@ -3,7 +3,7 @@ filebeat.inputs:
   combine_partial: true
   containers:
     paths:
-    - '/usr/share/dockerlogs/*/*.log'
+    - '/usr/share/dockerlogs/data/*/*.log'
     stream: "all"
     ids:
       - "*"
