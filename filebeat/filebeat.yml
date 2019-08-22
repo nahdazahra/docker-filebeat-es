@@ -27,25 +27,17 @@ processors:
 # setup filebeat to send output to elasticsearch
 output.elasticsearch:
   hosts: ["172.20.20.207:9200"]
-  index: "app1nahda"
+  index: "testapp"
 
-setup.template.name: "app1nahda"
-setup.template.pattern: "app1nahda-*"
+setup.template.name: "testapp"
+setup.template.pattern: "testapp-*"
 
 # setup.kibana:
-#   host: "localhost:5601"
+#   host: "172.20.20.207:5601"
 
 # Write Filebeat own logs only to file to avoid catching them with itself in docker log files
 logging.level: warning
 logging.to_files: false
 logging.to_syslog: true
-loggins.metrice.enabled: false
-logging.files:
-  path: /var/log/filebeat
-  # Name of files where logs will write
-  name: filebeat.log
-  # Log File will rotate if reach max size and will create new file. Default value is 10MB
-  rotateeverybytes: 10485760 # = 10MB
-  keepfiles: 7
-  permissions: 0644
+
 ssl.verification_mode: none
