@@ -15,18 +15,18 @@ filebeat.config.modules:
   reload.enabled: false
 
 processors:
-  # decode the log field (sub JSON document) if JSON encoded, then maps it's fields to elasticsearch fields
-  - decode_json_fields:
-      fields: ["log","message"]
-      target: ""
-    # overwrite existing target elasticsearch fields while decoding json fields    
-      overwrite_keys: true
-  - add_docker_metadata:
-      host: "unix:///var/run/docker.sock"
+# decode the log field (sub JSON document) if JSON encoded, then maps it's fields to elasticsearch fields
+- decode_json_fields:
+    fields: ["log","message"]
+    target: ""
+  # overwrite existing target elasticsearch fields while decoding json fields    
+    overwrite_keys: true
+- add_docker_metadata:
+    host: "unix:///var/run/docker.sock"
 
 # setup filebeat to send output to elasticsearch
 output.elasticsearch:
-  hosts: ["172.20.20.207:9200"]
+  hosts: ["http://172.20.20.207:9200"]
   index: "testapp"
 
 setup.template.name: "testapp"
