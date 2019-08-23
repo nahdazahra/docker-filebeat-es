@@ -10,10 +10,6 @@ filebeat.inputs:
   exclude_files: ['\.gz$']
   ignore_older: 10m
 
-filebeat.config.modules:
-  path: ${path.config}/modules.d/*.yml
-  reload.enabled: false
-
 processors:
 # decode the log field (sub JSON document) if JSON encoded, then maps it's fields to elasticsearch fields
 - decode_json_fields:
@@ -24,13 +20,18 @@ processors:
 - add_docker_metadata:
     host: "unix:///var/run/docker.sock"
 
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+
 # setup filebeat to send output to elasticsearch
 output.elasticsearch:
   hosts: ["http://172.20.20.207:9200"]
-  index: "testapp"
+  index: "testapp-%{[beat.version]}-%{+yyyy.MM.dd}"
 
 setup.template.name: "testapp"
 setup.template.pattern: "testapp-*"
+setup.template.overwrite: true
 
 # setup.kibana:
 #   host: "172.20.20.207:5601"
@@ -39,5 +40,3 @@ setup.template.pattern: "testapp-*"
 logging.level: debug
 logging.to_files: false
 logging.to_syslog: true
-
-ssl.verification_mode: none
