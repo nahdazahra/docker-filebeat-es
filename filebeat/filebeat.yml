@@ -29,9 +29,9 @@ output.elasticsearch:
   hosts: ["http://172.20.20.207:9200"]
   index: "testapp-%{[beat.version]}-%{+yyyy.MM.dd}"
 
-setup.template.name: "testapp"
-setup.template.pattern: "testapp-*"
-setup.template.overwrite: true
+setup.index_patterns.name: "testapp"
+setup.index_patterns.pattern: "testapp-*"
+setup.index_patterns.overwrite: true
 
 # setup.kibana:
 #   host: "172.20.20.207:5601"
