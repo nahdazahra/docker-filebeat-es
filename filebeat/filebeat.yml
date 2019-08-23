@@ -26,7 +26,7 @@ filebeat.config.modules:
 
 # setup filebeat to send output to elasticsearch
 output.elasticsearch:
-  hosts: ["172.20.20.207:9200"]
+  hosts: ["${host}:9200"]
   index: "testapp-%{[beat.version]}-%{+yyyy.MM.dd}"
 
 setup.template.name: "testapp"
