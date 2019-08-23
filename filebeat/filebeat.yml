@@ -26,12 +26,12 @@ filebeat.config.modules:
 
 # setup filebeat to send output to elasticsearch
 output.elasticsearch:
-  hosts: ["http://172.20.20.207:9200"]
-  index: "testapp-%{[beat.version]}-%{+yyyy.MM.dd}"
+  hosts: ["172.20.20.207:9200"]
+#   index: "testapp-%{[beat.version]}-%{+yyyy.MM.dd}"
 
-setup.template.name: "testapp"
-setup.template.pattern: "testapp-*"
-setup.template.overwrite: true
+# setup.template.name: "testapp"
+# setup.template.pattern: "testapp-*"
+# setup.dashboard.index: "testapp-*"
 
 # setup.kibana:
 #   host: "172.20.20.207:5601"
