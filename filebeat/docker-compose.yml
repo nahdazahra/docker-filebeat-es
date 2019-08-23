@@ -21,4 +21,4 @@ services:
       - "/var/lib/docker/containers:/usr/share/filebeat/logs" # access all docker logs (read only)
       - "/var/run/docker.sock:/var/run/docker.sock" # additional info about containers
     environment:
-      - host=localhost
+      - host=172.20.20.207

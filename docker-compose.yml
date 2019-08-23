@@ -21,7 +21,7 @@ services:
       - "/var/lib/docker/containers:/usr/share/filebeat/logs" # access all docker logs (read only)
       - "/var/run/docker.sock:/var/run/docker.sock" # additional info about containers
     environment:
-      - host=172.20.20.207
+      - host=localhost
 
   kibana:
     hostname: kibana
