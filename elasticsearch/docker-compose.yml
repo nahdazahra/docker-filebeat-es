@@ -2,7 +2,11 @@ version: '3'
 
 services:
   kibana:
-    image: kibana:6.5.2
+    hostname: kibana
+    image: docker-logs-elk/kibana:1.0.0
+    build: 
+      context: ../kibana
+      dockerfile: Dockerfile
     environment:
       - "LOGGING_QUIET=true"
       - port=5601

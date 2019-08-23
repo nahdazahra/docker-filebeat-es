@@ -3,7 +3,7 @@ filebeat.inputs:
   combine_partial: true
   containers:
     paths:
-    - '/usr/share/dockerlogs/data/*/*.log'
+    - '/usr/share/filebeat/data'
     stream: "all"
     ids:
       - "*"
@@ -27,11 +27,11 @@ filebeat.config.modules:
 # setup filebeat to send output to elasticsearch
 output.elasticsearch:
   hosts: ["172.20.20.207:9200"]
-#   index: "testapp-%{[beat.version]}-%{+yyyy.MM.dd}"
+  index: "testapp-%{[beat.version]}-%{+yyyy.MM.dd}"
 
-# setup.template.name: "testapp"
-# setup.template.pattern: "testapp-*"
-# setup.dashboard.index: "testapp-*"
+setup.template.name: "testapp"
+setup.template.pattern: "testapp-*"
+setup.dashboard.index: "testapp-*"
 
 # setup.kibana:
 #   host: "172.20.20.207:5601"

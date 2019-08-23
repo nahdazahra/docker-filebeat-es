@@ -16,14 +16,18 @@ services:
       context: filebeat
       dockerfile: Dockerfile
     volumes:
-      # needed to access all docker logs (read only) :
-      - "/var/lib/docker/containers:/usr/share/dockerlogs/data:ro"
-      # needed to access additional informations about containers
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    
+      # not dockerized service
+      # - "/home/ruma/log/uwsgi/uwsgi.log:/usr/share/log/uwsgi.log:ro"
+
+      - "/var/lib/docker/containers:/usr/share/filebeat/data:ro" # access all docker logs (read only)
+      - "/var/run/docker.sock:/var/run/docker.sock" # additional info about containers
+
   kibana:
     hostname: kibana
-    image: kibana:6.5.2
+    image: docker-logs-elk/kibana:1.0.0
+    build: 
+      context: kibana
+      dockerfile: Dockerfile
     environment:
       - "LOGGING_QUIET=true"
       - port=5601
