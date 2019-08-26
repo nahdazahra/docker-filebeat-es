@@ -3,7 +3,7 @@ version: '3'
 services:
   kibana:
     hostname: kibana
-    image: docker-logs-elk/kibana:1.0.0
+    image: kibana:1.0.0
     build: 
       context: ../kibana
       dockerfile: Dockerfile

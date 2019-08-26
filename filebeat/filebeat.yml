@@ -2,12 +2,10 @@ filebeat.inputs:
 - type: docker
   combine_partial: true
   containers:
-    paths:
-    - '/usr/share/filebeat/data'
+    path: "/usr/share/filebeat/data"
     stream: "all"
     ids:
       - "*"
-  exclude_files: ['\.gz$']
   ignore_older: 10m
 
 processors:
@@ -31,12 +29,9 @@ output.elasticsearch:
 
 setup.template.name: "testapp"
 setup.template.pattern: "testapp-*"
-setup.dashboard.index: "testapp-*"
-
-# setup.kibana:
-#   host: "172.20.20.207:5601"
 
 # Write Filebeat own logs only to file to avoid catching them with itself in docker log files
 logging.level: debug
+logging.json: true
 logging.to_files: false
 logging.to_syslog: true

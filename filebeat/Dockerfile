@@ -4,6 +4,6 @@ FROM docker.elastic.co/beats/filebeat:6.5.2
 COPY --chown=root:root filebeat.yml /usr/share/filebeat/filebeat.yml
 
 USER root
-# Change owner to access docker log files
+# Change owner to access docker log files in logs in filebeat/logs
 RUN chown -R root /usr/share/filebeat/
 RUN chmod -R go-w /usr/share/filebeat/

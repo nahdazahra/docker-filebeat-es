@@ -2,7 +2,7 @@ version: '3'
 
 services:
   app:
-    image: docker-logs-elk/dummy-app:1.0.0
+    image: filebeat-es_k/dummy-app:1.0.0
     build:
       context: dummy-app
       dockerfile: Dockerfile
@@ -11,21 +11,21 @@ services:
   filebeat:
     hostname: filebeat
     network_mode: host
-    image: docker-logs-elk/filebeat:1.0.0
+    image: filebeat-es_k/filebeat:1.0.0
     build:
       context: filebeat
       dockerfile: Dockerfile
     volumes:
       # not dockerized service
       # - "/home/ruma/log/uwsgi/uwsgi.log:/usr/share/log/uwsgi.log:ro"
-      - "/var/lib/docker/containers:/usr/share/filebeat/logs" # access all docker logs (read only)
+      - "/var/lib/docker/containers:/usr/share/filebeat/logs:ro" # access all docker logs (read only)
       - "/var/run/docker.sock:/var/run/docker.sock" # additional info about containers
     # environment:
     #   - host=localhost
 
   kibana:
     hostname: kibana
-    image: docker-logs-elk/kibana:1.0.0
+    image: filebeat-es_k/kibana:1.0.0
     build: 
       context: kibana
       dockerfile: Dockerfile
@@ -38,7 +38,7 @@ services:
 
   elasticsearch:
     hostname: elasticsearch
-    image: docker-logs-elk/elasticsearch:1.0.0
+    image: filebeat-es_k/elasticsearch:1.0.0
     build:
       context: elasticsearch
       dockerfile: Dockerfile

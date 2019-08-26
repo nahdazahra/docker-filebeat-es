@@ -18,7 +18,5 @@ services:
     volumes:
       # not dockerized service
       # - "/home/ruma/log/uwsgi/uwsgi.log:/usr/share/log/uwsgi.log:ro"
-      - "/var/lib/docker/containers:/usr/share/filebeat/logs" # access all docker logs (read only)
+      - "/var/lib/docker/containers:/usr/share/filebeat/logs:ro" # access all docker logs (read only)
       - "/var/run/docker.sock:/var/run/docker.sock" # additional info about containers
-    environment:
-      - host=172.20.20.207
