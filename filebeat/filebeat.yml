@@ -2,7 +2,7 @@ filebeat.inputs:
 - type: docker
   combine_partial: true
   containers:
-    path: "/usr/share/filebeat/data"
+    path: "/usr/share/filebeat/logs"
     stream: "all"
     ids:
       - "*"
